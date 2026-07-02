@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+Route::redirect('/', '/sub-content');
 
 Route::livewire('/sub-content', 'pages.main-content.sub-content.index')
     ->name('sub-content.index');
