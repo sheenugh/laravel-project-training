@@ -1,134 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laravel Practice Project</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #0f172a;
-            color: #f8fafc;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-            padding: 40px 0;
-        }
-
-        .hero {
-            text-align: center;
-            padding: 80px 20px;
-        }
-
-        .badge {
-            display: inline-block;
-            background: #1e293b;
-            color: #38bdf8;
-            padding: 8px 16px;
-            border-radius: 999px;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            color: #cbd5e1;
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
-        }
-
-        .btn {
-            display: inline-block;
-            background: #ef4444;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #334155;
-        }
-
-        .card h3 {
-            color: #38bdf8;
-            margin-bottom: 10px;
-        }
-
-        .card p {
-            color: #cbd5e1;
-            line-height: 1.5;
-        }
-
-        footer {
-            text-align: center;
-            color: #94a3b8;
-            margin-top: 60px;
-            padding: 20px;
-            border-top: 1px solid #334155;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Task Manager</title>
 </head>
-<body>
-    <div class="container">
-        <section class="hero">
-            <span class="badge">Laravel + WSL Setup Complete</span>
-            <h1>Welcome to My Laravel Practice Project</h1>
-            <p>
-                This is a simple Laravel landing page created while learning how to set up
-                WSL, Git, GitHub SSH, PHP, Composer, MySQL, and Laravel development workflow.
-            </p>
-            <a href="#features" class="btn">View Features</a>
-        </section>
+<body style="margin:0; font-family:Arial, sans-serif; background:#0f172a; color:white;">
+    <div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:30px;">
+        <div style="max-width:1000px; width:100%;">
 
-        <section id="features" class="cards">
-            <div class="card">
-                <h3>Laravel Project</h3>
-                <p>Created using Composer and configured to run locally with Artisan.</p>
-            </div>
+            <nav style="display:flex; justify-content:space-between; align-items:center; margin-bottom:70px;">
+                <h2 style="margin:0; font-size:24px;">Task Manager</h2>
 
-            <div class="card">
-                <h3>Database Ready</h3>
-                <p>Connected to MySQL and prepared for migrations and future data storage.</p>
-            </div>
+                <div style="display:flex; gap:14px; align-items:center;">
+                    @auth
+                        <a href="{{ route('dashboard') }}" style="color:white; text-decoration:none;">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" style="color:white; text-decoration:none;">Login</a>
+                        <a href="{{ route('register') }}" style="background:#4f46e5; color:white; padding:10px 16px; border-radius:8px; text-decoration:none; font-weight:bold;">Register</a>
+                    @endauth
+                </div>
+            </nav>
 
-            <div class="card">
-                <h3>GitHub Workflow</h3>
-                <p>Project changes can be committed and pushed to GitHub using Git commands.</p>
-            </div>
-        </section>
+            <section style="text-align:center;">
+                <div style="display:inline-block; background:#1e293b; color:#93c5fd; padding:8px 14px; border-radius:999px; font-size:14px; margin-bottom:22px;">
+                    Organize tasks. Track progress. Stay productive.
+                </div>
 
-        <footer>
-            <p>Created by Sheena Mae Delima | Laravel Training Project</p>
-        </footer>
+                <h1 style="font-size:52px; line-height:1.1; margin:0 0 20px;">
+                    Manage your tasks with clarity and control.
+                </h1>
+
+                <p style="font-size:18px; color:#cbd5e1; max-width:700px; margin:0 auto 32px;">
+                    A simple task management app for creating, viewing, updating, and tracking tasks with secure user access and activity monitoring.
+                </p>
+
+                <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+                    @auth
+                        <a href="{{ route('dashboard') }}" style="background:#4f46e5; color:white; padding:14px 22px; border-radius:10px; text-decoration:none; font-weight:bold;">
+                            Go to Dashboard
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" style="background:#4f46e5; color:white; padding:14px 22px; border-radius:10px; text-decoration:none; font-weight:bold;">
+                            Login
+                        </a>
+                        <a href="{{ route('register') }}" style="background:#1e293b; color:white; padding:14px 22px; border-radius:10px; text-decoration:none; font-weight:bold; border:1px solid #334155;">
+                            Create Account
+                        </a>
+                    @endauth
+                </div>
+            </section>
+
+            <section style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; margin-top:80px;">
+                <div style="background:#1e293b; padding:24px; border-radius:14px; border:1px solid #334155;">
+                    <h3 style="margin-top:0;">Task Tracking</h3>
+                    <p style="color:#cbd5e1;">Create and organize tasks with clear status and action pages.</p>
+                </div>
+
+                <div style="background:#1e293b; padding:24px; border-radius:14px; border:1px solid #334155;">
+                    <h3 style="margin-top:0;">Role-Based Access</h3>
+                    <p style="color:#cbd5e1;">User access is controlled based on assigned roles and permissions.</p>
+                </div>
+
+                <div style="background:#1e293b; padding:24px; border-radius:14px; border:1px solid #334155;">
+                    <h3 style="margin-top:0;">Activity Logs</h3>
+                    <p style="color:#cbd5e1;">Important user actions are recorded for monitoring and accountability.</p>
+                </div>
+            </section>
+
+        </div>
     </div>
 </body>
 </html>
