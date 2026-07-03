@@ -42,6 +42,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        app(\Spatie\Permission\PermissionRegistrar::class)->setPermissionsTeamId(1);
+        $user->assignRole('staff');
+
         event(new Registered($user));
 
         Auth::login($user);
